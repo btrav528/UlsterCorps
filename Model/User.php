@@ -1,10 +1,10 @@
 <?php
-class Users{
+class User{
 static public function Get($id = null) {
 		if (isset($id)) {
-			return Fetch_One("SELECT * FROM 2013Fall_User WHERE Id=$id");
+			return Fetch_One("SELECT * FROM Users WHERE Id=$id");
 		} else {
-			return FetchAll('SELECT * FROM 2013Fall_User');
+			return FetchAll('SELECT * FROM Users');
 		}
 	}
 }
