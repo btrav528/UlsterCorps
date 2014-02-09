@@ -7,5 +7,20 @@ static public function Get($id = null) {
 			return FetchAll('SELECT * FROM Users');
 		}
 	}
+static public function Delete($id) {
+		$conn = GetConnection();
+		$sql = " DELETE From Users WHERE Id=$id ";
+
+		$conn -> query($sql);
+		//echo $sql;
+		$error = $conn -> error;
+		$conn -> close();
+		//$error = "dd";
+		if ($error) {
+			return array('db_error' => $error);
+		} else {
+			return false;
+		}
+	}
 }
 ?>

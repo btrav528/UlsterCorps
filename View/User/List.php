@@ -6,17 +6,20 @@
 	<table>
 		<thead>
 		<tr>
-			<th>Id</th>
+			
 			<th>First Name</th>
 			<th>Last Name</th>
+			<th>Control Level</th>
+			<th></th>
 		</tr>
 		</thead>
 		<tbody>
 			  <? foreach ($model as $rs): ?>
                         <tr class=" <?= $rs['Id']==$_REQUEST['Id'] ? 'success' : '' ?> ">
-                        	 <td><?=$rs['FirstName']?></td>
+                        	 	<td><?=$rs['FirstName']?></td>
                                 <td><?=$rs['LastName']?></td>
                                 <td><?=$rs['Level']?></td>
+                                <td><a href="?action=delete&id=<?=$rs['Id']?>">delete</a></td>
                 <? endforeach ?>
 		</tbody>
 	</table>
