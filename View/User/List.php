@@ -20,6 +20,7 @@
                                 <td><?=$rs['LastName']?></td>
                                 <td><?=$rs['Level']?></td>
                                 <td><a href="?action=delete&id=<?=$rs['Id']?>">delete</a></td>
+                                <td><a href="?action=edit&id=<?=$rs['Id']?>">edit entry</a></td>
                 <? endforeach ?>
 		</tbody>
 	</table>

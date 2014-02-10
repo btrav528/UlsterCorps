@@ -3,11 +3,11 @@ include_once '../../inc/_global.php';
 @$action = $_REQUEST['action'];
 switch($action){
 		case 'new':
-                $model = Users::Blank();
+                $model = User::Blank();
                 $view         = 'edit.php';                
 		case 'edit':
 			 case 'edit':
-                $model  = Users::Get($_REQUEST['id']);
+                $model  = User::Get($_REQUEST['id']);
                 $view         = 'edit.php';                
 		break;
 			
