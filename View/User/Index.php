@@ -26,10 +26,21 @@ switch($action){
                 $model  = User::Get($_REQUEST['id']);
                 $view         = 'delete.php';                                         
                 break;
-		case 'delete2':
-			$model= User::Delete($model['id']);
-			$view= "List.php";
-			break;		
+	
+			case 'save':
+                $errors = User::Validate($_REQUEST);
+                if(!$errors){
+                        $errors = User::Save($_REQUEST);                        
+                }
+                if(!$errors){
+                        header("Location: ?status=Saved&Id=".$_REQUEST['Id']);
+                        die();
+                }                        
+                        $model = $_REQUEST;
+                        $view = 'edit.php';
+                        $title        = "Edit: " .$model['2013Fall_FirstName']. $model['LastName']      ;        
+                
+			break;
 		default:
                 $model  = User::Get();
                 $view         = 'List.php';
