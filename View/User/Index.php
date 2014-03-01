@@ -1,7 +1,11 @@
 <?php
 include_once '../../inc/_global.php';
+
 @$action = $_REQUEST['action'];
 switch($action) {
+	case 'login':
+		
+		break;
 	case 'new' :
 		$model = User::Blank();
 		$view = 'edit.php';
@@ -112,6 +116,11 @@ switch($action) {
 
 		break;
 	default :
+		if($_SESSION["UserType"]==USER){
+					$id=$_SESSION["Id"];
+
+		}
+
 		$model = User::Get();
 		$view = 'List.php';
 		break;

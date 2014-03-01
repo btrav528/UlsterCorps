@@ -1,4 +1,5 @@
 <?php
+session_start();
 include_once __DIR__ . '../../Model/User.php';
 function GetConnection() {
 	global $sql_password;
