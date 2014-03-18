@@ -35,7 +35,7 @@
                 <div class="form-group <?=isset($errors['Password']) ? 'has-error' : '' ?>">
                         <label for="Password" class="col-sm-2 control-label">Password</label>
                         <div class="col-sm-10">
-                                <input type="password" name="Password" id="Password" placeholder="Password" class="form-control "/>
+                                <input type="password" name="Password" id="Password" placeholder="Password" class="form-control "  value="<?=$model['Password'] ?>" />
                         </div>
                         <span><?=@$errors['Password'] ?></span>
                 </div>

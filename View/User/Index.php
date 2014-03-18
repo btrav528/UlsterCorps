@@ -1,6 +1,7 @@
 <?php
 include_once '../../inc/_global.php';
-
+Auth::Secure();
+$user=$_SESSION['User'];
 @$action = $_REQUEST['action'];
 switch($action) {
 	case 'login':
@@ -9,7 +10,7 @@ switch($action) {
 	case 'new' :
 		$model = User::Blank();
 		$view = 'edit.php';
-
+		break;
 	case 'edit' :
 		$model = User::Get($_REQUEST['id']);
 		$view = 'edit.php';
@@ -103,7 +104,8 @@ switch($action) {
 			if (empty($_REQUEST['VideoPhoto'])) {
 				$_REQUEST['VideoPhoto'] = 0;
 			}
-
+			$_REQUEST['Password']=sha1($_REQUEST['Password']);
+			$_REQUEST['Email']=sha1($_REQUEST['Email']);
 			$errors = User::Save($_REQUEST);
 		}
 		if (!$errors) {
@@ -116,14 +118,18 @@ switch($action) {
 
 		break;
 	default :
-		if($_SESSION["UserType"]==USER){
-					$id=$_SESSION["Id"];
 
+		if($user["Level"]==1){
+				$model=$user;
 		}
-
-		$model = User::Get();
+		else{
+			$model = User::Get();
+		}	
 		$view = 'List.php';
 		break;
 }
+
 include $view;
+
+
 ?>

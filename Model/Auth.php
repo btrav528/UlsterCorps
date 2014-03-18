@@ -1,8 +1,11 @@
-<?
+<?php
 	const ADMIN = 0;
 	const USER = 1;
 	class Auth
 	{
+		public static function logout(){
+			session_destroy();
+		}
 		public static function IsLoggedIn()
 		{
 			return self::GetUser() != null;
@@ -18,15 +21,19 @@
 		}
 
 		public static function LogIn($userName, $password) {
-		$sql = "        SELECT * Users 
-                                                     WHERE U.UserName='$userName'
+			
+		$sql = "        SELECT * FROM Users 
+                                                     WHERE UserName='$userName'
                                         ";
+										
 		$user = Fetch_One($sql);
 		if ($user == null) {
+			echo"user null";
 			$_SESSION['loginUserError'] = "That User Doesn't Exist";
 			unset($_SESSION['loginPasswordError']);
 			header("Location: ?action=login");
 		} else if ($user['Password'] == $password) {
+			echo "password";
 			$_SESSION['User'] = $user;
 			unset($_SESSION['loginPasswordError']);
 		} else {
@@ -40,7 +47,7 @@
 		static public function Secure()
 		{
 			if(!self::IsLoggedIn()){
-				header('Location: ' . "?action=login"); die();
+				header('Location: ' . "../../View/Auth/index.php?action=login"); die();
 			}
 		}
 	}
