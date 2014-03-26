@@ -2,39 +2,37 @@
 session_start();
 include_once __DIR__ . '../../Model/User.php';
 include_once __DIR__ . '../../Model/Auth.php';
+include_once __DIR__ . '../../Model/Hours.php';
 include_once ('_password.php');
 function GetConnection() {
 	global $sql_password;
-	$conn = new mysqli('localhost', 'root', $sql_password, 'test');
-	return $conn;
+	$conn = new mysqli('localhost', 'root', $sql_password, 'test' );
+		return $conn;
 
-}
+		}
 
-function FetchAll($sql)
-{
-	global $rs;
-	
-	global $Id;
+		function FetchAll($sql)
+		{
+		global $rs;
 
-        $ret = array();
-        $conn = GetConnection();
-        $result = $conn->query($sql);
-        echo $conn->error;
-        
-        while ($rs = $result->fetch_assoc()) {
-                $ret[] = $rs;
-			
-        }
-        
-        $conn->close();
+		global $Id;
 
-        return $ret;
-	}
-function Fetch_One($sql)
-{		
-        $arr = FetchAll($sql);
-        return $arr[0];
-		
-}
+		$ret = array();$conn = GetConnection();
+		$result = $conn->query($sql);
+		echo $conn->error;
 
-?>
+		while ($rs = $result->fetch_assoc()) {
+		$ret[] = $rs;
+
+		}
+
+		$conn->close();
+		return $ret;
+		}
+		function Fetch_One($sql)
+		{		
+		$arr = FetchAll($sql);
+		return $arr[0];
+
+		}
+	?>

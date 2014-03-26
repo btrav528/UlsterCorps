@@ -1,11 +1,10 @@
 <?php
 include_once '../../inc/_global.php';
 Auth::Secure();
-$user=$_SESSION['User'];
+$user = $_SESSION['User'];
 @$action = $_REQUEST['action'];
 switch($action) {
-	case 'login':
-		
+	case 'login' :
 		break;
 	case 'new' :
 		$model = User::Blank();
@@ -14,11 +13,6 @@ switch($action) {
 	case 'edit' :
 		$model = User::Get($_REQUEST['id']);
 		$view = 'edit.php';
-		break;
-
-	case 'details' :
-		$model = User::Get($_REQUEST['id']);
-		$view = 'details.php';
 		break;
 	case 'delete' :
 		if (isset($_POST['id'])) {
@@ -104,8 +98,7 @@ switch($action) {
 			if (empty($_REQUEST['VideoPhoto'])) {
 				$_REQUEST['VideoPhoto'] = 0;
 			}
-			$_REQUEST['Password']=sha1($_REQUEST['Password']);
-			$_REQUEST['Email']=sha1($_REQUEST['Email']);
+			$_REQUEST['Password'] = sha1($_REQUEST['Password']);
 			$errors = User::Save($_REQUEST);
 		}
 		if (!$errors) {
@@ -118,18 +111,14 @@ switch($action) {
 
 		break;
 	default :
-
-		if($user["Level"]==1){
-				$model=$user;
-		}
-		else{
+		if ($user["Level"] == 1) {
+			$model = $user;
+		} else {
 			$model = User::Get();
-		}	
+		}
 		$view = 'List.php';
 		break;
 }
 
 include $view;
-
-
 ?>

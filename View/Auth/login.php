@@ -8,7 +8,7 @@
 	<?php if(isset($errors) && count($errors)): ?>
 		<ul>
 		<?php foreach ($errors as $key => $value): ?>
-			<li><label><?=$key?>:</label> <?=$value?></li>
+			<li><label><?=$key ?>:</label> <?=$value ?></li>
 		<?php endforeach; ?>
 		</ul>
 	<?php endif; ?>
@@ -19,8 +19,8 @@
 			<div class="col-sm-10">
 				<input type="text" name="UserName" id="UserName" placeholder="User Name" class="form-control" value="<?php $model['UserName'] ?>" />
 				<?php if(isset($errors['UserName'])): ?><
-				span class ="error"><?php $errors['UserName'] ?><
-				/span><?php endif; ?>
+				span class ="error"><?php $errors['UserName'] ?>
+				</span><?php endif; ?>
 			</div>
 		</div>
 
@@ -42,4 +42,4 @@
 	</form>
 </div>
 <a href="../Auth/index.php?action=new">New User?</a>
-<?php echo $pas;?>
+<?php echo $pas; ?>

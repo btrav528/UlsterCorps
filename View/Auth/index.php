@@ -5,6 +5,11 @@ global $pas;
 $errors = null;
 
 switch ($action) {
+	default :
+		$model = array('UserName' => null, 'Password' => null);
+		$view = 'login.php';
+		break;
+
 	case 'login' :
 		$model = array('UserName' => null, 'Password' => null);
 		$view = 'login.php';
@@ -12,11 +17,11 @@ switch ($action) {
 		break;
 
 	case 'submitLogin' :
-		$_REQUEST['Password']=sha1($_REQUEST['Password']);
+		$_REQUEST['Password'] = sha1($_REQUEST['Password']);
 		Auth::LogIn($_REQUEST['UserName'], $_REQUEST['Password']);
 		
-		header("Location: ../User/");
-		
+		header("Location: ../welcome.php");
+
 		break;
 	case 'logout' :
 		Auth::logout();
