@@ -13,6 +13,7 @@ function GetConnection() {
 
 		function FetchAll($sql)
 		{
+			//echo $sql;
 		global $rs;
 
 		global $Id;
@@ -32,7 +33,11 @@ function GetConnection() {
 		function Fetch_One($sql)
 		{		
 		$arr = FetchAll($sql);
+		if(!$arr){
+			return null;
+		}
+		else{
 		return $arr[0];
-
+		}
 		}
 	?>

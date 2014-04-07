@@ -4,6 +4,11 @@
 	<a href="?action=new">Create new request</a>
 	<a href="../User/">View Profile</a>
 <h1>List of hours awaiting aproval:</h1>
+
+
+
+
+<?php if(!$model['error']):?>
 	<table border="1">
 		<thead>
 		<tr>
@@ -14,7 +19,9 @@
 		</tr>
 		</thead>
 		<tbody>
-			<?php foreach ($model as $rs){
+			
+			<?php unset ($model['error']);
+			foreach ($model as $rs){
 				$Uid=$rs['Users_Id'];
 				$Eid=$rs['Event_Id'];
 				$date=$rs['Date'];
@@ -39,5 +46,10 @@
                                 <td><a href="?action=edit&id=<?php echo $rs['Id'] ?>">edit entry</a></td>
                                 </tr>
                  <?php } ?>
+              
+                 	
 		</tbody>
+		   <?php else:?>
+		   	<h2><?php echo $model['error'];?></h2>
+		   	<?php endif;?>
 		

@@ -20,7 +20,7 @@ switch ($action) {
 		$_REQUEST['Password'] = sha1($_REQUEST['Password']);
 		Auth::LogIn($_REQUEST['UserName'], $_REQUEST['Password']);
 		
-		header("Location: ../welcome.php");
+
 
 		break;
 	case 'logout' :

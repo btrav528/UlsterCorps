@@ -20,7 +20,6 @@ class Hours {
 		if (isset($id)) {
 			return Fetch_One("SELECT * FROM Hours WHERE users_Id=$id");
 		} else {
-			echo "fetchall";
 			return FetchAll('SELECT * FROM Hours');
 		}
 

@@ -28,7 +28,7 @@ switch($action) {
 
 	case 'save' :
 		$errors = User::Validate($_REQUEST);
-		if (!$errors) {
+		
 			if (empty($_REQUEST['Artists'])) {
 				$_REQUEST['Artists'] = 0;
 			}
@@ -98,6 +98,7 @@ switch($action) {
 			if (empty($_REQUEST['VideoPhoto'])) {
 				$_REQUEST['VideoPhoto'] = 0;
 			}
+if (!$errors) {
 			$_REQUEST['Password'] = sha1($_REQUEST['Password']);
 			$errors = User::Save($_REQUEST);
 		}

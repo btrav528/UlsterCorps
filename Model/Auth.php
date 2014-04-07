@@ -35,6 +35,7 @@ class Auth {
 			echo "password";
 			$_SESSION['User'] = $user;
 			unset($_SESSION['loginPasswordError']);
+			header("Location: ../welcome.php");
 		} else {
 			unset($_SESSION['loginUserError']);
 			$_SESSION['loginPasswordError'] = "Password is incorrect";

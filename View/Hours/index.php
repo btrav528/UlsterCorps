@@ -18,7 +18,7 @@ switch($action) {
 		}
 		$model = $_REQUEST;
 		$view = 'new.php';
-		
+
 		break;
 	case 'new' :
 		$model = array('Id' => null, 'HoursRequested' => null, 'TimeIn' => null, 'TimeOut' => null, 'Date' => null, 'Event_Id' => null, 'Users_Id' => $user['Id']);
@@ -27,12 +27,20 @@ switch($action) {
 	default :
 		if ($user["Level"] == 0) {
 			$model = Hours::Get();
+			$model['error']=null;
 
 		} else {
 
 			$model = Hours::Get($user['Id']);
-			$model['Event'] = Hours::GetEvent($model['Event_Id']);
+			if(!$model){
+				$model['error']= "You do not have any hour requests pending";
+			}
+			else{
 			$model['User'] = Hours::GetUser($model['users_id']);
+			$model['Event'] = Hours::GetEvent($model['Event_Id']);
+			
+
+			}
 		}
 		$view = 'List.php';
 		break;

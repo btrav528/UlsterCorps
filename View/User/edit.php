@@ -33,9 +33,9 @@
                         <span><?=@$errors['UserName'] ?></span>
                 </div>
                 <div class="form-group <?=isset($errors['Password']) ? 'has-error' : '' ?>">
-                        <label for="Password" class="col-sm-2 control-label">Password</label>
+                        <label for="Password" class="col-sm-2 control-label">Password: Enter new password or reenter old one.</label>
                         <div class="col-sm-10">
-                                <input type="password" name="Password" id="Password" placeholder="Password" class="form-control "/>
+                                <input type="password" name="Password" id="Password"  class="form-control "/>
                         </div>
                         <span><?=@$errors['Password'] ?></span>
                 </div>
