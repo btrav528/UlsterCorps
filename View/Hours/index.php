@@ -27,18 +27,16 @@ switch($action) {
 	default :
 		if ($user["Level"] == 0) {
 			$model = Hours::Get();
-			$model['error']=null;
+			$model['error'] = null;
 
 		} else {
 
 			$model = Hours::Get($user['Id']);
-			if(!$model){
-				$model['error']= "You do not have any hour requests pending";
-			}
-			else{
-			$model['User'] = Hours::GetUser($model['users_id']);
-			$model['Event'] = Hours::GetEvent($model['Event_Id']);
-			
+			if (!$model) {
+				$model['error'] = "You do not have any hour requests pending";
+			} else {
+				$model['User'] = Hours::GetUser($model['users_id']);
+				$model['Event'] = Hours::GetEvent($model['Event_Id']);
 
 			}
 		}

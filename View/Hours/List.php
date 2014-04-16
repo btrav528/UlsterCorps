@@ -49,7 +49,7 @@
               
                  	
 		</tbody>
-		   <?php else:?>
-		   	<h2><?php echo $model['error'];?></h2>
-		   	<?php endif;?>
+		   <?php else: ?>
+		   	<h2><?php echo $model['error']; ?></h2>
+		   	<?php endif; ?>
 		

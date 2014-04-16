@@ -1,10 +1,9 @@
-<?php var_dump($_SESSION);?>
 <style type="text/css">
 	.error {
 		color: red;
 	}
 </style>
-<a href='?action=loginorg'>Logging in as an orginization?</a>
+
 <div class="container">
 	<?php $errors = isset($errors) ? $errors : array(); ?>
 	<?php if(isset($errors) && count($errors)): ?>
@@ -14,7 +13,7 @@
 		<?php endforeach; ?>
 		</ul>
 	<?php endif; ?>
-	<form action="?action=submitLogin" method="post" class="form-horizontal row">
+	<form action="?action=submitLoginOrg" method="post" class="form-horizontal row">
 
 		<div class="form-group <?php isset($errors['UserName']) ? 'has-error' : '' ?>">
 			<label for="UserName" class="col-sm-2 control-label">User Name</label>
@@ -43,4 +42,4 @@
 		</div>
 	</form>
 </div>
-<a href="../Auth/index.php?action=new">New User?</a>
+<?php echo $pas; ?>

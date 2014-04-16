@@ -15,13 +15,18 @@ switch ($action) {
 		$view = 'login.php';
 		$title = "Login";
 		break;
+	case 'loginorg':
+		$model=array('UserName'=>null, 'Password'=>null);
+		$view='loginorg.php';
+		break;
 
 	case 'submitLogin' :
-		$_REQUEST['Password'] = sha1($_REQUEST['Password']);
 		Auth::LogIn($_REQUEST['UserName'], $_REQUEST['Password']);
-		
 
-
+		break;
+	case 'submitLoginOrg':
+		$_REQUEST['Password'] = sha1($_REQUEST['Password']);
+		Auth::LogInOrg($_REQUEST['UserName'], $_REQUEST['Password']);
 		break;
 	case 'logout' :
 		Auth::logout();
