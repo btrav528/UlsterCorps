@@ -1,18 +1,26 @@
-<?php $user = $_SESSION['User']; ?>
-<?php var_dump($user);?>
+
+<?php $user = $_SESSION['User'];
+	//var_dump($user);
+ ?>
+
+
 
 <head>
-	<title>User List</title>
+	<?php
+	include "../../inc/header.php";
+?>
 </head>
 <body>
-	<h2> List of Users </h2>
-	<p>logged in as: <?php echo $user["display_name"] ?></p>
-	<a href="../Hours/index.php">View Hour Requests</a>
+	
+	<p>Logged in as: <?php echo $user["display_name"] ?></p>
+	<a href="../Hours/index.php">View Hour Requests&nbsp;&nbsp;</a>
 	<a href="../Auth/index.php?action=logout">Log out</a>
+<?php if($user['Level']==0){?>	
+<h1>List of Users</h1>
+	<?php } else {?>
+		<h1>User Profile</h1>
+		<?php }?>
 	
-
-	
-	<a href="?action=new">Add Contact</a>
 	
 	<table border="1">
 		<thead>
@@ -20,6 +28,7 @@
 			
 			<th>Name</th>
 			<th>Number of Hours done.</th>
+			<th>Actions</th>
 			
 			
 		</tr>
@@ -28,6 +37,7 @@
 			<?php if ($user['Level']!=0):?>
 			<td><?php echo $model['display_name'] ?></td>
             <td><?php echo $model['Hours'] ?></td>
+            <td><a href="?action=edit&id=<?php echo $model['Id']?>">Edit My Account</a></td>
 				<?php else: ?>
 			  <?php foreach ($model as $rs): ?>
 
@@ -36,8 +46,8 @@
                         <tr>
                         	 	<td><?php echo $rs['display_name'] ?></td>
                                 <td><?php echo $rs['Hours'] ?></td>
-                                <td><a href="?action=delete&id=<?php echo $rs['Id'] ?>">delete</a></td>
-                                <td><a href="?action=edit&id=<?php echo $rs['Id'] ?>">edit entry</a></td> </tr>
+                                <td><a href="?action=delete&id=<?php echo $rs['Id'] ?>">delete</a>
+                                <br><a href="?action=edit&id=<?php echo $rs['Id'] ?>">edit entry</a></td> </tr>
                  <?php endforeach; ?>
                  <?php endif; ?>
 		</tbody>

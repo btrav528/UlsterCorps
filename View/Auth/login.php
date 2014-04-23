@@ -1,10 +1,13 @@
-<?php var_dump($_SESSION);?>
+<head>
+		<?php include "../../inc/header.php";?>
+</head>
+
 <style type="text/css">
 	.error {
 		color: red;
 	}
 </style>
-<a href='?action=loginorg'>Logging in as an orginization?</a>
+<!--<a href='?action=loginorg'>Logging in as an orginization?</a>-->
 <div class="container">
 	<?php $errors = isset($errors) ? $errors : array(); ?>
 	<?php if(isset($errors) && count($errors)): ?>

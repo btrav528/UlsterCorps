@@ -15,12 +15,21 @@ class Hours {
 			return false;
 		}
 	}
+	static public function GetRequest($id){
+		return Fetch_One("SELECT * FROM Hours WHERE Hours.Id=$id");
+	}
 
 	static public function Get($id = null) {
 		if (isset($id)) {
-			return Fetch_One("SELECT * FROM Hours WHERE users_Id=$id");
+			return FetchAll("SELECT Hours.*, wp_users.display_name
+FROM Hours
+INNER JOIN Users, wp_users
+WHERE Hours.Users_Id=Users.Id AND wp_users.ID=Users.wp_users_id AND Users.Id=$id");
 		} else {
-			return FetchAll('SELECT * FROM Hours');
+			return FetchAll('SELECT Hours.*, wp_users.display_name
+FROM Hours
+INNER JOIN Users, wp_users
+WHERE Hours.Users_Id=Users.Id AND wp_users.ID=Users.wp_users_id ');
 		}
 
 	}
@@ -37,12 +46,8 @@ class Hours {
 		return Fetch_One("SELECT event_name FROM wp_em_events WHERE event_id=$id");
 	}
 
-	static public function GetUser($id) {
-		return Fetch_One("SELECT LastName FROM users WHERE Id=$id");
-	}
-
 	static public function GetEventList() {
-		return FetchAll("SELECT event_name , event_id FROM wp_em_events");
+		return FetchAll("SELECT event_name , event_id FROM wp_em_events WHERE event_end_date > '2013-10-23'");
 	}
 
 	static public function Validate($row) {
@@ -51,7 +56,7 @@ class Hours {
 		if (!$row['Date'])
 			$errors['Date'] = "Please enter the date that you volunteered.";
 		if (!$row['Event_Id'])
-			$errors['Event_Id'] = "Please select the even that you volunteered at.";
+			$errors['Event_Id'] = "Please select the event that you volunteered at.";
 		if (!$row['TimeIn'])
 			$errors['TimeIn'] = "Please specify what time you started working.";
 		if (!$row['TimeOut'])
@@ -59,6 +64,22 @@ class Hours {
 		if (!$row['HoursRequested'])
 			$errors['HoursRequested'] = "Please specify how many hours you worked.";
 		return count($errors) ? $errors : null;
+	}
+
+	static public function Delete($id) {
+		$conn = GetConnection();
+		$sql = " DELETE From Hours WHERE Id=$id ";
+
+		$conn -> query($sql);
+
+		$error = $conn -> error;
+		$conn -> close();
+
+		if ($error) {
+			return array('db_error' => $error);
+		} else {
+			return false;
+		}
 	}
 
 }

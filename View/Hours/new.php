@@ -1,3 +1,6 @@
+<head>
+		<?php include "../../inc/header.php";?>
+</head>
 
 <form action="?action=save" method="post"  class="form-horizontal row">
 <input type="hidden" name="Id" value="<?php echo $model['Id'] ?>" />

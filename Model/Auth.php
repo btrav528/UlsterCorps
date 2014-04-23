@@ -25,31 +25,33 @@ class Auth {
 
 		$sql = "SELECT wp_users.user_login, wp_users.user_pass, wp_users.ID, wp_users.display_name, wp_users.user_email, Users.Id, Users.Level
 		FROM wp_users 
-		INNER JOIN Users
+		LEFT JOIN Users
 		ON Users.wp_users_id=wp_users.ID
 		WHERE user_login='$userName'";
 		$user = Fetch_One($sql);
-		$id=$user['ID'];
+		$id = $user['ID'];
 		$password = $wp_hasher -> HashPassword($password);
 		echo $password;
 		if ($user == null) {
-			echo "user null";
+			//User name is not found in database
 			$_SESSION['loginUserError'] = "That user doesn't exist";
 			unset($_SESSION['loginPasswordError']);
 			header("Location: ?action=login");
 		} else if ($wp_hasher -> HashPassword($password, $user['user_pass'])) {
-
+			//username exists and password matches
 			$sql = "SELECT Users.Level, wp_users.display_name
 			FROM Users
 			INNER JOIN wp_users
 			ON Users.wp_users_id=wp_users.ID
 			WHERE wp_users.ID=$id";
-			$_SESSION['User']=Fetch_One($sql);
+			//CHANGE THIS!
+			$_SESSION['User'] = Fetch_One($sql);
 			$_SESSION['User'] = $user;
 			unset($_SESSION['loginPasswordError']);
+			unset($_SESSION['loginUserError']);
 			header("Location: ../welcome.php");
 		} else {
-			echo "password wrong";
+			//password is incorrect
 			unset($_SESSION['loginUserError']);
 			$_SESSION['loginPasswordError'] = "Password is incorrect";
 			header("Location: ?action=login");

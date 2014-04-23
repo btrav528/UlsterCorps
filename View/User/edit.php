@@ -1,5 +1,12 @@
+<head>
+		<?php
+	include "../../inc/header.php";
+?>
+</head>
+
+
 <div class="container">
-        <?php $errors = isset($errors) ? $errors : array(); ?>
+        <?php $errors = isset($errors) ? $errors : array();//var_dump($model); ?>
         <?php if(isset($errors) && count($errors)): ?>
                 <ul>
                 <?php foreach ($errors as $key => $value): ?>
@@ -7,13 +14,13 @@
                 <?php endforeach; ?>
                 </ul>
         <?php endif; ?>
-        <form action="?action=save" method="post"  class="form-horizontal row">
+        <form action=<?php if($user['Level']==null &&$user['Id']==null){echo "?action=firstSave";}else{ echo "?action=save";}?> method="post"  class="form-horizontal row">
                 <input type="hidden" name="Id" value="<?php echo $model['Id'] ?>" />
-                <input type="hidden" name="Level" value="<?php $model['Level'] ?>"/>
-                <input type="hidden" name= "IDWP" value ="<?php $model['ID']?>"/>
+                <input type="hidden" name="Level" value="<?php echo $model['Level'] ?>"/>
+                <input type="hidden" name= "ID" value ="<?php echo $model['ID']?>"/>
                 
-                <div class="form-group <?=isset($errors['displayname']) ? 'has-error' : '' ?>">
-                        <label for="display_name" class="col-sm-2 control-label">First Name</label>
+                <div class="form-group <?=isset($errors['display_name']) ? 'has-error' : '' ?>">
+                        <label for="display_name" class="col-sm-2 control-label">Full Name</label>
                         <div class="col-sm-10">
                                 <input type="text" name="display_name" id="display_name" placeholder="Your first and last name." class="form-control " value="<?=$model['display_name'] ?>"  />
                         </div>
@@ -33,12 +40,12 @@
                         </div>
                         <span><?=@$errors['user_pass'] ?></span>
                 </div>
-                 <div class="form-group <?=isset($errors['Email']) ? 'has-error' : '' ?>">
-                        <label for="Email" class="col-sm-2 control-label">Email Address</label>
+                 <div class="form-group <?=isset($errors['user_email']) ? 'has-error' : '' ?>">
+                        <label for="user_email" class="col-sm-2 control-label">Email Address</label>
                         <div class="col-sm-10">
-                                <input type="text" name="Email" id="Email" placeholder="Email Address" class="form-control "  value="<?=$model['Email'] ?>" />
+                                <input type="text" name="user_email" id="user_email" placeholder="Email Address" class="form-control "  value="<?=$model['user_email'] ?>" />
                         </div>
-                        <span><?=@$errors['Email'] ?></span>
+                        <span><?=@$errors['user_email'] ?></span>
                 </div>
                 <div class="form-group <?=isset($errors['PrimaryPhone']) ? 'has-error' : '' ?>">
                         <label for="PrimaryPhone" class="col-sm-2 control-label">Primary Phone Number</label>
@@ -226,6 +233,7 @@
                 <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
                                 <input type="submit" class="form-control btn btn-primary" value="save" />
+                                <a href="?action=list">Cancel</a>
                         </div>
                 </div>
                </form>

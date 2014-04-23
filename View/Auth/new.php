@@ -1,3 +1,7 @@
+<head>
+		<?php include "../../inc/header.php";?>
+</head>
+<body>
 <div class="container">
         <?php $errors = isset($errors) ? $errors : array(); ?>
         <?php if(isset($errors) && count($errors)): ?>
@@ -11,40 +15,33 @@
                 <input type="hidden" name="Id" value="<?php echo $model['Id'] ?>" />
                 <input type="hidden" name="Level" value="<?php $model['Level'] ?>"/>
                 
-                <div class="form-group <?=isset($errors['FirstName']) ? 'has-error' : '' ?>">
-                        <label for="FirstName" class="col-sm-2 control-label">First Name</label>
+               <div class="form-group <?=isset($errors['displayname']) ? 'has-error' : '' ?>">
+                        <label for="display_name" class="col-sm-2 control-label">Full Name</label>
                         <div class="col-sm-10">
-                                <input type="text" name="FirstName" id="FirstName" placeholder="First Name" class="form-control " value="<?=$model['FirstName'] ?>"  />
+                                <input type="text" name="display_name" id="display_name" placeholder="Your first and last name." class="form-control " value="<?=$model['display_name'] ?>"  />
                         </div>
-                        <span><?=@$errors['FirstName'] ?></span>
+                        <span><?=@$errors['display_name'] ?></span>
                 </div>
-                <div class="form-group <?=isset($errors['LastName']) ? 'has-error' : '' ?>">
-                        <label for="LastName" class="col-sm-2 control-label">Last Name</label>
+                <div class="form-group <?=isset($errors['user_login']) ? 'has-error' : '' ?>">
+                        <label for="user_login" class="col-sm-2 control-label">User Name</label>
                         <div class="col-sm-10">
-                                <input type="text" name="LastName" id="LastName" placeholder="Last Name" class="form-control " value="<?=$model['LastName'] ?>"  />
+                                <input type="text" name="user_login" id="user_login" placeholder="User Name" class="form-control " value="<?php echo $model['user_login'] ?>"  />
                         </div>
-                        <span><?=@$errors['LastName'] ?></span>
+                        <span><?=@$errors['user_login'] ?></span>
                 </div>
-                <div class="form-group <?=isset($errors['UserName']) ? 'has-error' : '' ?>">
-                        <label for="UserName" class="col-sm-2 control-label">User Name</label>
+                <div class="form-group <?=isset($errors['user_pass']) ? 'has-error' : '' ?>">
+                        <label for="user_pass" class="col-sm-2 control-label">Password: Enter new password or reenter old one.</label>
                         <div class="col-sm-10">
-                                <input type="text" name="UserName" id="UserName" placeholder="User Name" class="form-control " value="<?php echo $model['UserName'] ?>"  />
+                                <input type="password" name="user_pass" id="user_pass"  class="form-control "/>
                         </div>
-                        <span><?=@$errors['UserName'] ?></span>
+                        <span><?=@$errors['user_pass'] ?></span>
                 </div>
-                <div class="form-group <?=isset($errors['Password']) ? 'has-error' : '' ?>">
-                        <label for="Password" class="col-sm-2 control-label">Password</label>
+                 <div class="form-group <?=isset($errors['user_email']) ? 'has-error' : '' ?>">
+                        <label for="user_email" class="col-sm-2 control-label">Email Address</label>
                         <div class="col-sm-10">
-                                <input type="password" name="Password" id="Password" placeholder="Password" class="form-control "  value="<?=$model['Password'] ?>" />
+                                <input type="text" name="user_email" id="user_email" placeholder="Email Address" class="form-control "  value="<?=$model['user_email'] ?>" />
                         </div>
-                        <span><?=@$errors['Password'] ?></span>
-                </div>
-                 <div class="form-group <?=isset($errors['Email']) ? 'has-error' : '' ?>">
-                        <label for="Email" class="col-sm-2 control-label">Email Address</label>
-                        <div class="col-sm-10">
-                                <input type="text" name="Email" id="Email" placeholder="Email Address" class="form-control "  value="<?=$model['Email'] ?>" />
-                        </div>
-                        <span><?=@$errors['Email'] ?></span>
+                        <span><?=@$errors['user_email'] ?></span>
                 </div>
                 <div class="form-group <?=isset($errors['PrimaryPhone']) ? 'has-error' : '' ?>">
                         <label for="PrimaryPhone" class="col-sm-2 control-label">Primary Phone Number</label>
@@ -235,3 +232,4 @@
                         </div>
                 </div>
                </form>
+              </body>
