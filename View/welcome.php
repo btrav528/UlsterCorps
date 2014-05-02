@@ -11,5 +11,6 @@
 <a href='Hours'>View my hour requests&nbsp;&nbsp;</a>
 <a href="Auth/index.php?action=logout">Log out&nbsp;&nbsp;  </a>
 </div>
-<!--<a href='User/test.php'>test</a>-->
+<a href='User/test.php'>test</a>
+<?php var_dump($user);?>
 

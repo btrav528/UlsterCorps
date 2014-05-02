@@ -3,9 +3,11 @@ session_start();
 include_once __DIR__ . '../../Model/User.php';
 include_once __DIR__ . '../../Model/Auth.php';
 include_once __DIR__ . '../../Model/Hours.php';
+include_once __DIR__ .'../../Model/Org.php';
 include_once ('_password.php');
 include_once ('class-phpass.php');
 include_once ('pluggable.php');
+
 function GetConnection() {
 	global $sql_password;
 	$conn = new mysqli('localhost', 'root', $sql_password, 'test');

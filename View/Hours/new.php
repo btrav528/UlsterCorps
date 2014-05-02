@@ -1,5 +1,7 @@
 <head>
-		<?php include "../../inc/header.php";?>
+		<?php
+	include "../../inc/header.php";
+?>
 </head>
 
 <form action="?action=save" method="post"  class="form-horizontal row">
@@ -30,3 +32,4 @@ $list = Hours::getEventList();
   <input type="text" name="HoursRequested" id="HoursRequested" placeholder="Hours total" class="form-control " value="<?=$model['HoursRequested'] ?>"  />
  <br>
  <input type="submit" class="form-control btn btn-primary" value="save" />
+ <a href="?action=list">Cancel</a>

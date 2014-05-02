@@ -2,6 +2,8 @@
 include_once '../../inc/_global.php';
 Auth::Secure();
 $user = $_SESSION['User'];
+//var_dump($_SESSION);
+//var_dump($temp);
 
 @$action = $_REQUEST['action'];
 switch($action) {
@@ -82,17 +84,18 @@ switch($action) {
 		if (!$errors) {
 			$errors = User::FirstSave($_REQUEST);
 		}
-		if (!$errors) {
-			$temp = $_SESSION['User'];
-			$temp['Id'] = mysqli_insert_id($conn);
-			$_SESSION['User'] = $temp;
-			header("Location: index.php");
+		//if (array_key_exists('level', $errors)) {
+		$temp = $_SESSION['User'];
+		$temp['Id'] = $errors['Id'];
+		$temp['Level'] = $errors['Level'];
+		var_dump($temp);
+		$_SESSION['User'] = $temp;
+		header("Location: index.php");
 
-			die();
-		}
+		die();
+		//}
 		$model = $_REQUEST;
 		$view = 'edit.php';
-		$title = "Edit: " . $model['FirstName'] . $model['LastName'];
 
 		break;
 	case 'new' :

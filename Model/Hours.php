@@ -1,5 +1,8 @@
 <?php
 class Hours {
+	//static public function Approve($id, $hours){
+
+	//}
 	static public function Save($row) {
 		$conn = GetConnection();
 		$row2 = Hours::Encode($row, $conn);
@@ -15,7 +18,8 @@ class Hours {
 			return false;
 		}
 	}
-	static public function GetRequest($id){
+
+	static public function GetRequest($id) {
 		return Fetch_One("SELECT * FROM Hours WHERE Hours.Id=$id");
 	}
 
@@ -47,7 +51,23 @@ WHERE Hours.Users_Id=Users.Id AND wp_users.ID=Users.wp_users_id ');
 	}
 
 	static public function GetEventList() {
-		return FetchAll("SELECT event_name , event_id FROM wp_em_events WHERE event_end_date > '2013-10-23'");
+
+		$date = getdate();
+		$day = $date['mday'];
+		if ($day > 28) {
+			$day = 28;
+		}
+		$mon = $date['mon'];
+		$year = $date['year'];
+		if ($mon <= 6) {
+			$mon = $mon + 6;
+			$year = $year - 1;
+		} else {
+			$mon = $mon - 6;
+		}
+		$date = "$year-$mon-$day";
+
+		return FetchAll("SELECT event_name , event_id FROM wp_em_events WHERE event_end_date > '$date'");
 	}
 
 	static public function Validate($row) {

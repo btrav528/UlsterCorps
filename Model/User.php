@@ -51,12 +51,18 @@ ON wp_users.ID=Users.wp_users_id");
 		$conn = GetConnection();
 		$row2 = User::Encode($row, $conn);
 		$oid = $user['ID'];
-		$sql = "Insert Into Users ( Level, wp_users_id, PrimaryPhone, SecondaryPhone, ZIP, Artists, ComputerSkills, Construction, Cooking, EmergencyFeed, EmergencyShelter, Farming, Financial, Fundraising, Grantwriting, GraphicDesign, HealthCare,HeavyLifting, Media, MediationLegal, MentalCare, Mentorship, Research, Spanish, SpecialEvent, Transportation, Tutoring, VideoPhoto ) Values ('" . "''1', '" . $row2["ID"] . "', '" . $row2["PrimaryPhone"] . "', '" . $row2["SecondaryPhone"] . "', '" . $row2["ZIP"] . "', '" . $row2["Artists"] . "', '" . $row2["ComputerSkills"] . "', '" . $row2["Construction"] . "', '" . $row2["Cooking"] . "', '" . $row2["EmergencyFeed"] . "', '" . $row2["EmergencyShelter"] . "', '" . $row2["Farming"] . "', '" . $row2["Financial"] . "', '" . $row2["Fundraising"] . "', '" . $row2["Grantwriting"] . "', '" . $row2["GraphicDesign"] . "', '" . $row2["HealthCare"] . "', '" . $row2["HeavyLifting"] . "', '" . $row2["Media"] . "', '" . $row2["MediationLegal"] . "', '" . $row2["MentalCare"] . "', '" . $row2["Mentorship"] . "', '" . $row2["Research"] . "', '" . $row2["Spanish"] . "', '" . $row2["SpecialEvent"] . "', '" . $row2["Transportation"] . "', '" . $row2["Tutoring"] . "', '" . $row2["VideoPhoto"] . "') ";
+		$sql = "Insert Into Users (  wp_users_id, Level, PrimaryPhone, SecondaryPhone, ZIP, Artists, ComputerSkills, Construction, Cooking, EmergencyFeed, EmergencyShelter, Farming, Financial, Fundraising, Grantwriting, GraphicDesign, HealthCare,HeavyLifting, Media, MediationLegal, MentalCare, Mentorship, Research, Spanish, SpecialEvent, Transportation, Tutoring, VideoPhoto ) Values ('" . $row2["ID"] . "', 1, '" . $row2["PrimaryPhone"] . "', '" . $row2["SecondaryPhone"] . "', '" . $row2["ZIP"] . "', '" . $row2["Artists"] . "', '" . $row2["ComputerSkills"] . "', '" . $row2["Construction"] . "', '" . $row2["Cooking"] . "', '" . $row2["EmergencyFeed"] . "', '" . $row2["EmergencyShelter"] . "', '" . $row2["Farming"] . "', '" . $row2["Financial"] . "', '" . $row2["Fundraising"] . "', '" . $row2["Grantwriting"] . "', '" . $row2["GraphicDesign"] . "', '" . $row2["HealthCare"] . "', '" . $row2["HeavyLifting"] . "', '" . $row2["Media"] . "', '" . $row2["MediationLegal"] . "', '" . $row2["MentalCare"] . "', '" . $row2["Mentorship"] . "', '" . $row2["Research"] . "', '" . $row2["Spanish"] . "', '" . $row2["SpecialEvent"] . "', '" . $row2["Transportation"] . "', '" . $row2["Tutoring"] . "', '" . $row2["VideoPhoto"] . "') ";
 		$conn -> query($sql);
 
 		$error = $conn -> error;
-
+			$temp['id']=mysqli_insert_id($conn);
+			$temp['level']=1;
 		$conn -> close();
+		if ($error) {
+			return array('db_error' => $error);
+		} else {
+			return $temp;
+		}
 
 	}
 
@@ -81,11 +87,12 @@ ON wp_users.ID=Users.wp_users_id");
 			$error = $conn -> error;
 			$oid = mysqli_insert_id($conn);
 
-			$sql = "Insert Into Users ( Level, wp_users_id, PrimaryPhone, SecondaryPhone, ZIP, Artists, ComputerSkills, Construction, Cooking, EmergencyFeed, EmergencyShelter, Farming, Financial, Fundraising, Grantwriting, GraphicDesign, HealthCare,HeavyLifting, Media, MediationLegal, MentalCare, Mentorship, Research, Spanish, SpecialEvent, Transportation, Tutoring, VideoPhoto ) Values ('" . "''1', '" . $oid . "', '" . $row2["PrimaryPhone"] . "', '" . $row2["SecondaryPhone"] . "', '" . $row2["ZIP"] . "', '" . $row2["Artists"] . "', '" . $row2["ComputerSkills"] . "', '" . $row2["Construction"] . "', '" . $row2["Cooking"] . "', '" . $row2["EmergencyFeed"] . "', '" . $row2["EmergencyShelter"] . "', '" . $row2["Farming"] . "', '" . $row2["Financial"] . "', '" . $row2["Fundraising"] . "', '" . $row2["Grantwriting"] . "', '" . $row2["GraphicDesign"] . "', '" . $row2["HealthCare"] . "', '" . $row2["HeavyLifting"] . "', '" . $row2["Media"] . "', '" . $row2["MediationLegal"] . "', '" . $row2["MentalCare"] . "', '" . $row2["Mentorship"] . "', '" . $row2["Research"] . "', '" . $row2["Spanish"] . "', '" . $row2["SpecialEvent"] . "', '" . $row2["Transportation"] . "', '" . $row2["Tutoring"] . "', '" . $row2["VideoPhoto"] . "') ";
+			$sql = "Insert Into Users (wp_users_id,  Level, PrimaryPhone, SecondaryPhone, ZIP, Artists, ComputerSkills, Construction, Cooking, EmergencyFeed, EmergencyShelter, Farming, Financial, Fundraising, Grantwriting, GraphicDesign, HealthCare,HeavyLifting, Media, MediationLegal, MentalCare, Mentorship, Research, Spanish, SpecialEvent, Transportation, Tutoring, VideoPhoto ) Values ('" . $oid . "', 1, '" . $row2["PrimaryPhone"] . "', '" . $row2["SecondaryPhone"] . "', '" . $row2["ZIP"] . "', '" . $row2["Artists"] . "', '" . $row2["ComputerSkills"] . "', '" . $row2["Construction"] . "', '" . $row2["Cooking"] . "', '" . $row2["EmergencyFeed"] . "', '" . $row2["EmergencyShelter"] . "', '" . $row2["Farming"] . "', '" . $row2["Financial"] . "', '" . $row2["Fundraising"] . "', '" . $row2["Grantwriting"] . "', '" . $row2["GraphicDesign"] . "', '" . $row2["HealthCare"] . "', '" . $row2["HeavyLifting"] . "', '" . $row2["Media"] . "', '" . $row2["MediationLegal"] . "', '" . $row2["MentalCare"] . "', '" . $row2["Mentorship"] . "', '" . $row2["Research"] . "', '" . $row2["Spanish"] . "', '" . $row2["SpecialEvent"] . "', '" . $row2["Transportation"] . "', '" . $row2["Tutoring"] . "', '" . $row2["VideoPhoto"] . "') ";
 			echo $sql;
 			$conn -> query($sql);
 
 			$error = $conn -> error;
+
 
 		}
 
@@ -94,7 +101,7 @@ ON wp_users.ID=Users.wp_users_id");
 		if ($error) {
 			return array('db_error' => $error);
 		} else {
-			return false;
+			return $temp;
 		}
 
 	}

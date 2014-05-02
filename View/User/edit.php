@@ -1,12 +1,14 @@
 <head>
 		<?php
-	include "../../inc/header.php";
-?>
+		include "../../inc/header.php";
+	?>
 </head>
 
 
 <div class="container">
-        <?php $errors = isset($errors) ? $errors : array();//var_dump($model); ?>
+        <?php $errors = isset($errors) ? $errors : array();
+	//var_dump($model);
+ ?>
         <?php if(isset($errors) && count($errors)): ?>
                 <ul>
                 <?php foreach ($errors as $key => $value): ?>
@@ -14,7 +16,11 @@
                 <?php endforeach; ?>
                 </ul>
         <?php endif; ?>
-        <form action=<?php if($user['Level']==null &&$user['Id']==null){echo "?action=firstSave";}else{ echo "?action=save";}?> method="post"  class="form-horizontal row">
+        <form action=<?php
+			if ($user['Level'] == null && $user['Id'] == null) {echo "?action=firstSave";
+			} else { echo "?action=save";
+			}
+		?> method="post"  class="form-horizontal row">
                 <input type="hidden" name="Id" value="<?php echo $model['Id'] ?>" />
                 <input type="hidden" name="Level" value="<?php echo $model['Level'] ?>"/>
                 <input type="hidden" name= "ID" value ="<?php echo $model['ID']?>"/>

@@ -1,4 +1,3 @@
-
 <?php
 include_once '../../inc/_global.php';
 global $pas;
@@ -26,8 +25,7 @@ switch ($action) {
 
 		break;
 	case 'submitLoginOrg' :
-		$_REQUEST['Password'] = sha1($_REQUEST['Password']);
-		Auth::LogInOrg($_REQUEST['UserName'], $_REQUEST['Password']);
+		Org::LogIn($_REQUEST['UserName'], $_REQUEST['Password']);
 		break;
 	case 'logout' :
 		Auth::logout();
@@ -36,6 +34,22 @@ switch ($action) {
 	case 'new' :
 		$model = User::Blank();
 		$view = 'new.php';
+		break;
+	case 'newOrg':
+		$model= Org::Blank();
+		$view='newOrg.php';
+		break;
+	case 'saveOrg':
+		$errors=Org::Validate($_REQUEST);
+		$wp_hasher = new PasswordHash(8, TRUE);
+		$_REQUEST['Password'] = wp_hash_password($_REQUEST['Password']);
+		$errors = Org::Save($_REQUEST);
+		if (!$errors) {
+			header("Location: ?status=Saved&Id=" . $_REQUEST['Id']);
+			die();
+		}
+		$model = $_REQUEST;
+		$view = 'newOrg.php';
 		break;
 	case 'save' :
 		if (empty($_REQUEST['Artists'])) {

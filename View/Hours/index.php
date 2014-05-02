@@ -7,6 +7,14 @@ $user = $_SESSION['User'];
 @$action = $_REQUEST['action'];
 $errors = null;
 switch($action) {
+	//case 'approve':
+	//	$hours=
+		//$errors=Hours::Aprove($_REQUEST['id']);
+		//if(!$errors){
+		//	header("Location: ?");
+		//	die();
+		//}
+		//break;
 	case 'delete' :
 		if (isset($_POST['id'])) {
 			$errors = Hours::Delete($_REQUEST['id']);

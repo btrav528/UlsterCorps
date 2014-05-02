@@ -1,7 +1,7 @@
 <head>
 		<?php
-	include "../../inc/header.php";
-?>
+		include "../../inc/header.php";
+	?>
 </head>
 <?php $user = $_SESSION['User']; ?>
 <p>Logged in as: <?php echo $user["display_name"]; ?></p>
@@ -13,21 +13,21 @@
 
 <?php //var_dump($user); ?>
 
-<?php //if(!array_key_exists('error', $model)):?>
+<?php if(!array_key_exists('error', $model)){?>
 	<table border="1">
 		<thead>
 		<tr>
 			<?php if ($user['Level']==0){?>
 
 			<th> User Name</th>
-			<?php }?>	
+			<?php } ?>	
 			<th> Name of Event</th>
 			<th> Date of Hours Worked</th>
 			<th> Time In</th>
 			<th> Time Out</th>
 			<?php if ($user['Level']==0){?>
 						<th> User ID</th>
-						<?php }?>
+						<?php } ?>
 
 						<th>Actions</th>
 		</tr>
@@ -68,10 +68,18 @@
                                 <?php endif; ?>
                                 <td><a href="?action=delete&id=<?php echo $id; ?>">delete</a><br>
                                 <a href="?action=edit&id=<?php echo $id; ?>">edit entry</a></td>
+                                <?php //if($user['Level']==0){ ?>
+                                <!--<a href="?action=approve$if=<?php echo $id; ?>>Approve-->
+                                	<?php //} ?>
                                 </tr>
                  <?php } ?>
               
                  	
 		</tbody>
+		<?php }else{ ?>
+
+			<h2>You do not have any requets for hours pending.</h2>
+
+			<?php } ?>
 		   
 		
