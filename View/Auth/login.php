@@ -17,6 +17,7 @@
 		<?php endforeach; ?>
 		</ul>
 	<?php endif; ?>
+	<h3 align="center">Log-in for Users</h3>
 	<form action="?action=submitLogin" method="post" class="form-horizontal row">
 
 		<div class="form-group <?php isset($errors['UserName']) ? 'has-error' : '' ?>">

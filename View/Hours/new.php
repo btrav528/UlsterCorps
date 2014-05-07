@@ -10,13 +10,15 @@
 
 <?php
 $list = Hours::getEventList();
+var_dump($errors);
  ?>
  <label for="Event" class="col-sm-2 control-label">Select the  event you volunteered at:</label>
- <select name='Event_Id'>
+ <select name='event_id'>
  	<?php foreach($list as $rs):?>
  		
  		<option value=<?php echo $rs['event_id']; ?>><?php echo $rs['event_name']; ?></option>
  		<?php endforeach; ?>
+ 		<option value='0'>Other</option>
  </select>
  <br>
 <label for="Date" class="col-sm-2 control-label">What day did you volunteer? Please enter in YYYY-MM-DD format:</label>

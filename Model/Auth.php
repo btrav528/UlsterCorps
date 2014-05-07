@@ -49,7 +49,7 @@ class Auth {
 			$_SESSION['User'] = $user;
 			unset($_SESSION['loginPasswordError']);
 			unset($_SESSION['loginUserError']);
-			header("Location: ../welcome.php");
+			header("Location: ../User/welcome.php");
 		} else {
 			//password is incorrect
 			unset($_SESSION['loginUserError']);

@@ -6,17 +6,30 @@ class Hours {
 	static public function Save($row) {
 		$conn = GetConnection();
 		$row2 = Hours::Encode($row, $conn);
-		$sql = "INSERT INTO Hours(HoursRequested, TimeIn, TimeOut, Date, Event_Id, Users_Id )Values ('" . $row2["HoursRequested"] . "', '" . $row2["TimeIn"] . "', '" . $row2["TimeOut"] . "', '" . $row2["Date"] . "', '" . $row2["Event_Id"] . "', '" . $row2["Users_Id"] . "') ";
-		$conn -> query($sql);
+		if (array_key_exists("OtherLoc", $row2)) {
+			$sql = "INSERT INTO Hours(HoursRequested, TimeIn, TimeOut, Date, event_id, Users_Id, OtherLoc, OtherName,OtherOrg )Values ('" . $row2["HoursRequested"] . "', '" . $row2["TimeIn"] . "', '" . $row2["TimeOut"] . "', '" . $row2["Date"] . "', '" . $row2["event_id"] . "', '" . $row2["Users_Id"] . "', '" . $row2["OtherLoc"]."', '" . $row2["OtherName"] . "', '" . $row2["OtherOrg"] . "') ";
+			$conn -> query($sql);
 
-		$error = $conn -> error;
-		$conn -> close();
-
-		if ($error) {
-			return array('db_error' => $error);
+			$error = $conn -> error;
+			$conn -> close();
+			if ($error) {
+				return array('db_error1' => $error);
+			} else {
+				return false;
+			}
 		} else {
-			return false;
+			$sql = "INSERT INTO Hours(HoursRequested, TimeIn, TimeOut, Date, event_id, Users_Id )Values ('" . $row2["HoursRequested"] . "', '" . $row2["TimeIn"] . "', '" . $row2["TimeOut"] . "', '" . $row2["Date"] . "', '" . $row2["event_id"] . "', '" . $row2["Users_Id"] . "') ";
+			$conn -> query($sql);
+
+			$error = $conn -> error;
+			$conn -> close();
+			if ($error) {
+				return array('db_error2' => $error);
+			} else {
+				return false;
+			}
 		}
+
 	}
 
 	static public function GetRequest($id) {
@@ -75,8 +88,6 @@ WHERE Hours.Users_Id=Users.Id AND wp_users.ID=Users.wp_users_id ');
 		$errors = array();
 		if (!$row['Date'])
 			$errors['Date'] = "Please enter the date that you volunteered.";
-		if (!$row['Event_Id'])
-			$errors['Event_Id'] = "Please select the event that you volunteered at.";
 		if (!$row['TimeIn'])
 			$errors['TimeIn'] = "Please specify what time you started working.";
 		if (!$row['TimeOut'])

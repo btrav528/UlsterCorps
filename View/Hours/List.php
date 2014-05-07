@@ -36,6 +36,7 @@
 			<?php unset ($model['error']);
 			//var_dump($model);
 			foreach ($model as $rs){
+				//var_dump($rs);
 				$id=$rs['Id'];
 				$userName=$rs['display_name'];
 				$Uid=$rs['Users_Id'];
@@ -43,8 +44,13 @@
 				$date=$rs['Date'];
 				$TimeIn=$rs['TimeIn'];
 				$TimeOut=$rs['TimeOut'];
+				if($Eid==0){
+					$event['event_name']=$rs['OtherName'];
+				}else{
 				$event=Hours::GetEvent($Eid);
+				}
 				$mrs['Event'] = Hours::GetEvent($Eid);
+				//var_dump($Eid);
 				
 				//var_dump($id);
 

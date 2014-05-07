@@ -7,7 +7,7 @@
 		color: red;
 	}
 </style>
-<a href='?action=loginorg'>Logging in as an orginization?</a>
+<a href='?action=login'>Logging in as a user?</a>
 <div class="container">
 	<?php $errors = isset($errors) ? $errors : array(); ?>
 	<?php if(isset($errors) && count($errors)): ?>
@@ -17,6 +17,7 @@
 		<?php endforeach; ?>
 		</ul>
 	<?php endif; ?>
+	<h3 align="center">Log-in for orginizations</h3>
 	<form action="?action=submitLoginOrg" method="post" class="form-horizontal row">
 
 		<div class="form-group <?php isset($errors['UserName']) ? 'has-error' : '' ?>">
